@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>20170306 FB 粉絲團新春抽獎</title>
+    <style>
+    body,
+    html {
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        padding: 0;
+    }
+    
+    body {
+        background: #cbe3f1;
+    }
+    
+    #machine {
+        position: absolute;
+        bottom: 0;
+        left: calc(50% - 350px);
+        width: 700px;
+        height: 700px;
+        background-image: url('bg.jpg');
+        background-size: cover;
+    }
+    
+    #light {
+        position: absolute;
+        top: 46.1px;
+        left: 57px;
+        width: 492px;
+        display: none;
+    }
+    
+    #btn {
+        position: absolute;
+        width: 70px;
+        height: 200px;
+        top: 200px;
+        right: 20px;
+        background: none;
+        opacity: 0;
+        cursor: pointer;
+    }
+    
+    #userName {
+        position: absolute;
+        width: 410px;
+        height: 100px;
+        font-size: 80px;
+        line-height: 100px;
+        background: none;
+        top: 320px;
+        left: 100px;
+        text-align: center;
+        overflow: hidden;
+    }
+    </style>
+</head>
+
+<body>
+    <div id="machine">
+        <img src="light.gif" alt="" id="light">
+        <div id="userName">抽獎準備中</div>
+        <div id="btn"></div>
+    </div>
+    <script>
+    var btn = document.getElementById('btn');
+    var user = document.getElementById('userName');
+    var light = document.getElementById('light');
+    var fans = [
+        'Ziu Shin Liu', '張薰之', 'Yo Yo Liu', 'Wu Vincent', 'Wenting Jou', '陳美蘭', '林兒芳', '吳翊瑄', '黃欣怡', 'Villige Wind', '陳遇見', '林湘研', 'Vantien Huang', '林修安', '劉曉華', '梁成德', 'Sunny Liu', 'Shu-Ling Wu', '楊子揚', 'Shining Chen', 'Shao Man', '謝君君', '王采淇', 'Sandy Sung', '謝春香', 'Sally Guan', 'Robin Hsu', '吳宜倫', '劉軍琦', '謝佳鳳', 'Peggy Chen', 'Ooscar Su', '張鈔摺', 'Mesak Chuang', '謝謝謝', 'Maxfi Cheng', '陳品諠', 'Liwen Huang', 'Kuei Jiang', '林志霖', 'Josh Chou', '石凱丞', 'Jordan Chen', 'Jason Chen', 'Ho Ziwen', 'Fee Ling', '林翔哲', 'Cian Cheng Jhan', 'Chi-ling Li', '劉達諦', 'Chen Chen', 'Angelia WU', '李虹儀', 'Andy Lin', 'An Dai', 'Alina WU', '姿穎何', '莊偉宏', '朱恩德', '鍾奕信', '趙翊紜', '張秀金', '張小彥', '張素禎', '張琪珍', '張珮甄', '張家愷', '張川山', '詹詠昕', '願盼晴', '玉芬 李', '游藝樺', '游琮菘', '游碧惠', '怡娟陳', '黃雯雯', '葉展宏', '葉香', '楊宜臻', '楊欣桂', '蔡美雲', '楊立德', '顏崎展', '許祐晨', '許詠翔', '許騰今', '許家卉', '李麥克', '許翠婉', '徐小柔', '徐盛煌', '謝飛飛', 'Wangoo Shu', '謝淳宇', '蕭裕濤', '夏櫻櫻', '夏喬喬', '伍元煌', '吳佳玲', '吳博穎', '翁有志', '王毅', '王顗翔', '王陽聖', '王芯芯', '王菁菁', '孫麗', '蘇洛', '蘇柏州', '史特龍', '石凱亦', '施並堅', '薩秋', '邱宥騰', '丘彪', '蒲雪妮', '馬任平', '羅揚文', '羅雅倫', '呂俊諺', '盧怡芬', '劉昱旻', '劉淑鑾', '劉人友', 'Pa Pa A', '劉品秀', '劉霖霖', '劉豪萱', '林育麟', '林小豐', 'Werold Wang', '林淑貞', 'Esam Tsai', '林琦寶', '林琳依', 'Anny Chi', '林廉芳', '林可尉', '林俊志', '林建良', '林風風', '廖小緣', 'AN NA', '梁文祥', '李昭慶', '李順吉', 'Leo Huang', '李麗絲', '藍宇祥', '藍惠玲', '賴峙如', '解書兆', 'Hsin-kai Liao', '江戍妹', '江如', '紀妮妮', 'Benson Hung', '黃歆晴', '黃慶安', 'Jas Mine', '黃姵霖', '黃莉雯', 'Rick Ma', '黃德明', '洪怡涵', '洪小美', 'Zhen Zheng', '洪梅英', 'TaiLi Ueng', '洪建國', 'Neo King', '洪佳慧', '賀詩雅', '何怡賢', '郭乃菁', '范薰云', '動機起床', '塵埃', '陳知之', '陳之昀', '陳增盛', '陳鈺絃', 'Ying-mao Yeh', '陳儀斌', '陳秀玉', '陳麒升', '陳美玲', 'Susan Chui', '陳進福', 'Wang Ula', 'Angel Wang', '陳建旻', '陳家祥', '陳家寶', '陳冠宇', '陳大頭', '蔡易霖', '蔡維綸', 'Karen Huang', '蔡春梅'
+    ];
+    var userNumber = fans.length;
+    var r = Math.floor(Math.random(10) * userNumber);
+    var n = 80 + r;
+    var t = 80;
+    var timer;
+
+    btn.onmousedown = function() {
+        ready();
+    }
+
+    btn.onclick = function() {
+        a();
+    };
+
+
+    function a() {
+        n = n - 1;
+        t = t + 10;
+        user.innerHTML = fans[n % userNumber];
+        if (n <= r) {
+            clearTimeout(timer);
+            user.style.color = "#f00";
+            light.style.display = "block";
+        } else {
+            timer = setTimeout(a, t);
+        }
+    }
+
+    function ready() {
+        user.innerHTML = "預備...";
+    }
+    </script>
+</body>
+
+</html>
